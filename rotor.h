@@ -16,6 +16,7 @@ class Rotor {
     char reverse(char c);
     // rotates the mapping, returns true if the next rotor should rotate
     virtual bool rotate();
+    void setState(char c) { offset_ = char_to_int(c); };
 
     std::string type() const { return typeid(*this).name(); }
     std::string name() const { return name_; }

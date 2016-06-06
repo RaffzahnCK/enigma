@@ -12,7 +12,7 @@ static const std::string HELP = "help";
 static const std::string DISPLAY_AVAILABLE_ROTORS = "rotors";
 static const std::string LOAD_CONFIG = "config";
 static const std::string SET_ROTORS = "set_rotors";
-static const std::string SET_START_POS = "set_rotors_pos";
+static const std::string SET_START_POS = "set_pos";
 static const std::string DEBUG = "debug";
 
 
@@ -52,6 +52,13 @@ int main() {
           }
           c.setConfig(config_vec);
         } else if (matches_arg(input, SET_START_POS, OPTIONS_POS)) {
+          std::string str = findOptionsArg(input,
+                                            OPTIONS_POS + SET_START_POS.size());
+          std::vector<std::string> rotor_states = split(str, ',');
+          for (int i = 0; i < rotor_states.size(); ++i) {
+            rotor_states[i] = trim(rotor_states[i]);
+          }
+          c.setRotorStates(rotor_states);
         } else if (matches_arg(input, DEBUG, OPTIONS_POS)) {
           std::string str = findOptionsArg(input, OPTIONS_POS + DEBUG.size());
           std::transform(str.begin(), str.end(), str.begin(), ::toupper);

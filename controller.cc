@@ -86,7 +86,7 @@ bool Controller::loadConfig(std::string filename) {
   return 1;
 }
 
-bool Controller::setConfig(std::vector<std::string> config_vector) {
+bool Controller::setConfig(const std::vector<std::string>& config_vector) {
   current_rotors_.clear();
   if (rotors_.size() == 0)
     throw std::invalid_argument("No rotor configs available");
@@ -107,6 +107,27 @@ bool Controller::setConfig(std::vector<std::string> config_vector) {
       << config_vector[i] << "]";
   }
   std::cout << std::endl;
+  return 1;
+}
+
+bool Controller::setRotorStates(const std::vector<std::string>& rotor_states) {
+  if (rotor_states.size() != current_rotors_.size() - 1) {
+    throw std::invalid_argument("ERROR: Improper rotor states given. There are "
+        + std::to_string(current_rotors_.size() - 1) + " rotors in the"
+        " enigma machine, excluding the reflector, but "
+        + std::to_string(rotor_states.size()) + " rotor states were given.");
+  }
+  for (int i = 0; i < rotor_states.size(); ++i) {
+    if (rotor_states[i].size() != 1) {
+      throw std::invalid_argument("ERROR: Rotor state should be a single letter"
+          ", but " + std::to_string(rotor_states[i].size()) + " was given for"
+          "the rotor state at position " + std::to_string(i));
+    } else if (!isalpha(rotor_states[i][0])) {
+      throw std::invalid_argument("ERROR: Rotor state is not a letter.");
+    }
+    current_rotors_[i]->setState(toupper(rotor_states[i][0]));
+  }
+  std::cout << "Success! New rotor states set." << std::endl;
   return 1;
 }
 

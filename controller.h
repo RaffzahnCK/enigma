@@ -12,7 +12,8 @@ class Controller {
     Controller() {}
     std::string translate(std::string s);
     bool loadConfig(std::string filename);
-    bool setConfig(std::vector<std::string> config_vector);
+    bool setConfig(const std::vector<std::string>& config_vector);
+    bool setRotorStates(const std::vector<std::string>& rotor_states);
     void setDebug(bool on);
     void displayAvailableRotors();
  private:

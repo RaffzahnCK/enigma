@@ -44,9 +44,9 @@ void help() {
     " : Defines current rotor configuration in Enigma " <<
     "\n\texample: --set_rotors 1,2,3,B loads Rotor 1, Rotor 2, Rotor 3, "
     "Reflector B" << std::endl;
-  std::cout << "--set_rotors_pos : Sets current states of each rotor " <<
+  std::cout << "--set_pos : Sets current states of each rotor " <<
     "\n\texample: --set_rotors_pos A,B,C sets Rotor [1] to A, Rotor [2]  to B "
     "and Rotor [3] to C. Reflectors don't have a state, so no need to set a "
-    "state for the reflector. NOT YET IMPLEMENTED" << std::endl;
+    "state for the reflector." << std::endl;
   std::cout << "Type words at > to encode/decode messages. " << std::endl;
 }
